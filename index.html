@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Persebaran Stasiun MKG di Indonesia</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-measure/dist/leaflet-measure.css" />
+    <link rel="icon" href="locator.png">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #map {
+            height: 100%;
+            flex: 7;
+        }
+        #sidebar {
+            height: 100%;
+            flex: 3;
+            padding: 0;
+            overflow-y: auto;
+            padding-left: 20px;
+        }
+        #map-container {
+            display: flex;
+            height: 100%;
+            width: 100%;
+        }
+        #search-input {
+            width: 100%;
+            padding-top: 20px;
+            margin-bottom: 10px;
+            position: sticky;
+            top: 60px;
+            background-color: #f1f1f1;
+            padding: 10px;
+            z-index: 1;
+        }
+        #sidebar input {
+            margin-top: 20px;
+            width: 90%;
+            padding-top: 10px;
+            border-radius: 10px;
+            border: 1px solid #fff;
+        }
+        #sidebar h2 {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            padding: 20px 0;
+            margin: 0;
+            text-align: center;
+        }
+        #building-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #building-list li {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff;
+            color: #000;
+        }
+        #building-list li a {
+            text-decoration: none;
+            color: #000;
+        }
+        #building-list li:hover {
+            background-color: #f1f1f1;
+        }
+        #google-spreadsheet-link {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            display: flex;
+            align-items: center;
+            background-color: #4CAF50;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            text-decoration: none;
+            font-family: 'Material Symbols Outlined', sans-serif;
+            font-size: 20px;
+            z-index: 1001;
+        }
+        #legend {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            display: flex;
+            z-index: 1001;
+        }
+        @media screen and (max-width: 768px) {
+            #map-container {
+                flex-direction: column;
+            }
+            #map {
+                height: 50vh;
+                flex: 7;
+            }
+            #sidebar {
+                flex: 3;
+                top: 20px;
+                margin-top: 28px;
+            }
+            #sidebar h2{
+                padding: 0px;
+            }
+            #sidebar input{
+                padding-bottom: 20px;
+                align-items: justify;
+            }
+            #sidebar building-list{
+                padding-top: 10px;
+                position: fixed;
+            }
+            #search-input {
+                top: 0;
+            }
+        }
+
+      
+    </style>
+</head>
+<body>
+    <div id="map-container">
+        <div id="map">
+            <button id="google-spreadsheet-link" onclick="goToGoogleSheets()">
+                <img src="data.png" alt="Logo" height="30">
+            </button>
+
+            <div id="legend">
+                <img src="legend.png" alt="legenda" height="100">
+            </div>
+
+        </div>
+
+        <div id="sidebar">
+            <h2>Daftar Stasiun</h2>
+            <input type="text" id="search-input" placeholder="Cari Stasiun...">
+            <ul id="building-list"></ul>
+        </div>
+
+    </div>
+    <script>
+        function goToGoogleSheets() {
+            window.location.href = "https://docs.google.com/spreadsheets/d/1D2PTqmBmgIe65zbqzXD9kEjQLW6idQelDgv-_EMOCAQ/edit?usp=sharing";
+        }
+    </script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/leaflet-measure/dist/leaflet-measure.js"></script>
+    <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
